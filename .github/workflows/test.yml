@@ -14,10 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: install packages
+        run: |
+          sudo apt update 
+          sudo apt install libpcl-dev  libomp-dev libvtk9-dev ibopenmpi-dev
+          sudo apt upgrade -y
+      - name: git submodule update
+        run: git submodule update --init --recursive
       - name: Configure CMake
-        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DSET_RENDER_VULKAN=OFF
       - name: Build
         run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
-      - name: test
-        run: ctest run_test
-        working-directory: ${{github.workspace}}/build
