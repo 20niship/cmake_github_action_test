@@ -17,7 +17,7 @@ jobs:
       - name: install packages
         run: |
           sudo apt update 
-          sudo apt install libpcl-dev  libomp-dev libvtk9-dev ibopenmpi-dev
+          sudo apt install libpcl-dev libomp-dev libvtk9-dev
           sudo apt upgrade -y
       - name: git submodule update
         run: git submodule update --init --recursive
