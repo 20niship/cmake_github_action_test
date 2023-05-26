@@ -20,6 +20,13 @@ jobs:
           sudo apt update 
           sudo apt install libpcl-dev libomp-dev libvtk9-dev openmpi-bin libopenmpi-dev
           sudo apt upgrade -y
+      - name: install pybind
+        run: |
+          git clone https://github.com/pybind/pybind11.git pybind
+          cd pybind && mkdir build && cd build
+          cmake -B /tmp/pybind/build -DCMAKE_BUILD_TYPE=Release
+          cd /tmp/pybind/build && make
+          cd /tmp/pybind/build && sudo make install
       - name: Configure CMake
         run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
       - name: Build
