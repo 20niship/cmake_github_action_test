@@ -23,8 +23,7 @@ jobs:
       - name: install pybind
         run: |
           git clone https://github.com/pybind/pybind11.git pybind
-          cd pybind && mkdir build && cd build
-          cmake -B /tmp/pybind/build -DCMAKE_BUILD_TYPE=Release
+          cmake -S /tmp/pybind -B /tmp/pybind/build -DCMAKE_BUILD_TYPE=Release
           cd /tmp/pybind/build && make
           cd /tmp/pybind/build && sudo make install
       - name: Configure CMake
