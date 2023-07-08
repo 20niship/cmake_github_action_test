@@ -16,6 +16,14 @@ set(TEST_NAME mytest)
 add_executable(${TEST_NAME} mytest.cpp)
 add_test(NAME run_test COMMAND ${TEST_NAME})
 
+set(TEST_GLOBAL_BAR "" CACHE INTERNAL "Global bar")
+message("before = " ${TEST_GLOBAL_BAR})
+
+include(cmake/test_global_bar.cmake)
+add_test_global()
+message("after = " ${TEST_GLOBAL_BAR})
+
+
 target_link_libraries(${TEST_NAME} ${PCL_LIBRARIES})
 
 
